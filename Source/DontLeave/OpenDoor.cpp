@@ -39,7 +39,7 @@ void UOpenDoor::CloseDoor()
 	AActor* Owner = GetOwner();
 	FRotator Rotator = FRotator(0.f, (OpenAngle - OpenAngle), 0.f);
 	IsOpen = false;
-
+	
 	Owner->SetActorRotation(Rotator);
 }
 
@@ -55,8 +55,9 @@ void UOpenDoor::OpenDoor()
 
 // Called when the game starts
 void UOpenDoor::BeginPlay()
-{
+{	
 	Super::BeginPlay();
+	ActorThatOpens = GetWorld()->GetFirstPlayerController()->GetPawn();
 	OpenDoor();
 	// ...
 	
