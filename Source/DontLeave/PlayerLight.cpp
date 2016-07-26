@@ -20,8 +20,7 @@ UPlayerLight::UPlayerLight()
 void UPlayerLight::BeginPlay()
 {
 	Super::BeginPlay();
-
-	ParentActor = GetWorld()->GetFirstPlayerController()->GetPawn();
+	ParentActor = GetWorld()->GetFirstPlayerController();
 	// ...
 	
 }
@@ -30,8 +29,10 @@ void UPlayerLight::BeginPlay()
 // Called every frame
 void UPlayerLight::TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction )
 {
-	Super::TickComponent( DeltaTime, TickType, ThisTickFunction );
-	GetOwner()->SetActorRotation(ParentActor->GetActorRotation());
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+	FRotator ParentRotation = ParentActor->GetActorRotation();
+
+	GetOwner()->SetActorRotation(ParentRotation);
 	// ...
 }
 
