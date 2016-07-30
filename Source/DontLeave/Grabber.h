@@ -24,5 +24,12 @@ public:
 private:
 	UPROPERTY(EditAnywhere)
 	AActor* TargetActor;
-	float Reach;
+	float Reach = 100.f;
+
+	UInputComponent* InputHandler = nullptr;
+	UPhysicsHandleComponent* PhysicsHandle = nullptr;
+
+
+	// Raycast and cast in reach
+	void Grab();
 };
