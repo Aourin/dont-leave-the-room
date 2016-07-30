@@ -23,5 +23,6 @@ public:
 
 private:
 	UPROPERTY(EditAnywhere)
+	AActor* TargetActor;
 	float Reach;
 };
