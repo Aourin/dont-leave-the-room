@@ -20,7 +20,6 @@ UOnActionEvent::UOnActionEvent()
 void UOnActionEvent::BeginPlay()
 {
 	Super::BeginPlay();
-
 	// ...
 	
 }
@@ -30,7 +29,7 @@ void UOnActionEvent::BeginPlay()
 void UOnActionEvent::TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction )
 {
 	Super::TickComponent( DeltaTime, TickType, ThisTickFunction );
-
+	
 	// ...
 }
 
