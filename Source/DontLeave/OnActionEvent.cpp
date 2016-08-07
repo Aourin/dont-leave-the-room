@@ -29,7 +29,13 @@ void UOnActionEvent::BeginPlay()
 void UOnActionEvent::TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction )
 {
 	Super::TickComponent( DeltaTime, TickType, ThisTickFunction );
-	
-	// ...
+}
+
+/**
+*   Dispatches an Action name and calls it if found
+*/
+void UOnActionEvent::DispatchActionEvent(FName ActionName)
+{
+	UE_LOG(LogTemp, Warning, TEXT("Grab Item"));
 }
 
