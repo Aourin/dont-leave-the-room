@@ -11,7 +11,6 @@ UOpenDoor::UOpenDoor()
 	// off to improve performance if you don't need them.
 	bWantsBeginPlay = true;
 	PrimaryComponentTick.bCanEverTick = true;
-
 }
 
 //	Returns IsOpen
@@ -70,7 +69,12 @@ void UOpenDoor::TickComponent( float DeltaTime, ELevelTick TickType, FActorCompo
 
 	if (PressurePlate->IsOverlappingActor(ActorThatOpens))
 	{
-		if (IsOpen) {
+		float TotalMass = GetTotalMassOfActorsOnPlate();
+		UE_LOG(LogTemp, Warning, TEXT("%f is the mass"), TotalMass);
+		if (ShouldOpen(TotalMass))
+		{
+			OpenDoor();
+		} else {
 			CloseDoor();
 		}
 	}
@@ -83,3 +87,23 @@ void UOpenDoor::TickComponent( float DeltaTime, ELevelTick TickType, FActorCompo
 	// ...
 }
 
+float UOpenDoor::GetTotalMassOfActorsOnPlate()
+{
+	float TotalMass = 0.f;
+
+	TArray<AActor*> OverlappingActors;
+	LightPressurePlate->GetOverlappingActors(OUT OverlappingActors);
+
+	for (const auto& Actor : OverlappingActors)
+	{
+		TotalMass += Actor->FindComponentByClass<UPrimitiveComponent>()->GetMass();
+		UE_LOG(LogTemp, Warning, TEXT("%f on pressure plate"), TotalMass);
+	}
+
+	return TotalMass;
+}
+
+bool UOpenDoor::ShouldOpen(float TotalMass)
+{
+	return TotalMass == TriggerWeight;
+}

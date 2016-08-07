@@ -23,8 +23,7 @@ public:
 	
 	// Called every frame
 	virtual void TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction ) override;
-
-
+	float GetTotalMassOfActorsOnPlate();
 private:
 	UPROPERTY(EditAnywhere)
 	bool IsOpen = false;
@@ -34,7 +33,13 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	ATriggerVolume* PressurePlate;
-	
+
+	UPROPERTY(EditAnywhere)
+	ATriggerVolume* LightPressurePlate;
+
+	UPROPERTY(EditAnywhere)
+	float TriggerWeight = 32.f;
+	bool ShouldOpen(float SomeWeight);
 	AActor* ActorThatOpens;
 
 };
