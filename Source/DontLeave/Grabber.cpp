@@ -51,7 +51,7 @@ void UGrabber::Grab()
 			NAME_None,
 			TargetActor->GetActorLocation(),
 			true
-		);
+			);
 	}
 }
 
