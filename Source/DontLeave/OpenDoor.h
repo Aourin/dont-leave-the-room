@@ -6,7 +6,7 @@
 #include "OpenDoor.generated.h"
 
 
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class DONTLEAVE_API UOpenDoor : public UActorComponent
 {
 	GENERATED_BODY()
@@ -32,14 +32,14 @@ private:
 	float OpenAngle = 90.f;
 
 	UPROPERTY(EditAnywhere)
-	ATriggerVolume* PressurePlate;
+	ATriggerVolume* PressurePlate = nullptr;
 
 	UPROPERTY(EditAnywhere)
-	ATriggerVolume* LightPressurePlate;
+	ATriggerVolume* LightPressurePlate = nullptr;
 
 	UPROPERTY(EditAnywhere)
 	float TriggerWeight = 32.f;
 	bool ShouldOpen(float SomeWeight);
-	AActor* ActorThatOpens;
+	AActor* ActorThatOpens = nullptr;
 
 };

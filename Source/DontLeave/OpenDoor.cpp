@@ -57,7 +57,20 @@ void UOpenDoor::BeginPlay()
 {	
 	Super::BeginPlay();
 	ActorThatOpens = GetWorld()->GetFirstPlayerController()->GetPawn();
-	OpenDoor();
+	if (!PressurePlate)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("No Pressure Plate found for %s"), *GetOwner()->GetName());
+	} else if (!ActorThatOpens)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("No Actor that Opens found for %s"), *GetOwner()->GetName());
+	}
+	else if (!LightPressurePlate)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("No Light Pressure Plate that Opens found for %s"), *GetOwner()->GetName());
+	}
+	else {
+		OpenDoor();
+	}
 	// ...
 	
 }
@@ -66,6 +79,18 @@ void UOpenDoor::BeginPlay()
 void UOpenDoor::TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction )
 {
 	Super::TickComponent( DeltaTime, TickType, ThisTickFunction );
+	if (!PressurePlate)
+	{
+		return;
+	}
+	if (!ActorThatOpens)
+	{
+		return;
+	}
+	if (!LightPressurePlate)
+	{
+		return;
+	}
 
 	if (PressurePlate->IsOverlappingActor(ActorThatOpens))
 	{
@@ -89,6 +114,10 @@ void UOpenDoor::TickComponent( float DeltaTime, ELevelTick TickType, FActorCompo
 
 float UOpenDoor::GetTotalMassOfActorsOnPlate()
 {
+	if (!LightPressurePlate)
+	{
+		return 0.f;
+	}
 	float TotalMass = 0.f;
 
 	TArray<AActor*> OverlappingActors;
