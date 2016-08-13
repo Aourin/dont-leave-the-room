@@ -5,8 +5,7 @@
 #include "Components/ActorComponent.h"
 #include "OpenDoor.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnOpenRequest);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnCloseRequest);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FDoorEvent);
 
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class DONTLEAVE_API UOpenDoor : public UActorComponent
@@ -28,10 +27,10 @@ public:
 	float GetTotalMassOfActorsOnPlate();
 
 	UPROPERTY(BlueprintAssignable)
-	FOnOpenRequest OnOpenRequest;
+	FDoorEvent OnOpenRequest;
 
 	UPROPERTY(BlueprintAssignable)
-	FOnCloseRequest OnCloseRequest;
+	FDoorEvent OnCloseRequest;
 
 private:
 	UPROPERTY(EditAnywhere)
