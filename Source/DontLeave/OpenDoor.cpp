@@ -35,21 +35,13 @@ void UOpenDoor::ToggleDoor()
 //	Close The Door
 void UOpenDoor::CloseDoor()
 {
-	AActor* Owner = GetOwner();
-	FRotator Rotator = FRotator(0.f, (OpenAngle - OpenAngle), 0.f);
-	IsOpen = false;
-	
-	Owner->SetActorRotation(Rotator);
+	OnCloseRequest.Broadcast();
 }
 
 //	Open The Door
 void UOpenDoor::OpenDoor()
-{
-	AActor* Owner = GetOwner();
-	FRotator Rotator = FRotator(0.f, OpenAngle, 0.f);
-	IsOpen = true;
-
-	Owner->SetActorRotation(Rotator);
+{	
+	OnOpenRequest.Broadcast();
 }
 
 // Called when the game starts
